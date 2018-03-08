@@ -1,13 +1,20 @@
 {
-  "name": "books",
+  "name": "koa2-books-admin",
   "version": "1.0.0",
-  "description": "koa2",
+  "description": "A koa2 project",
   "main": "config.js",
   "scripts": {
     "start": "gulp dev",
     "init": "node server/initdb/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "koa2",
+    "koa",
+    "node",
+    "koa-router",
+    "ejs"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
