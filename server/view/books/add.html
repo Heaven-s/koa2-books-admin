@@ -1,0 +1,57 @@
+<body>
+        <div class="container">
+            <% include ../tpl/nav %>   
+            <% include ../tpl/bread %>
+            <form id="form" action="/api/books/add" method="post" enctype="multipart/form-data"> 
+                <div class="form-group">
+                    <label for="title">书名</label>
+                    <input name="title" type="text" class="form-control title" id="title" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="author">作者</label>
+                    <input name="author" type="text" class="form-control author" id="author" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="description">描述</label>
+                    <textarea name="description" id="description" class="form-control description" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="file">上传电子书</label>
+                    <input name="file" type="file" id="file">
+                    <p class="help-block">请上传pdf文件</p>
+                </div>
+                <button type="submit" class="btn btn-default btn_submit">新增</button>
+            </form>
+        </div>
+        <% include ../tpl/script %>
+        <script>
+
+            $('.btn_submit').on('click', function (e) {
+                e.preventDefault();
+                var input = document.getElementById('file');
+                
+                var obj = {};
+
+                var data = new FormData();
+                data.append('url', input.files[0]);
+                data.append('title', $('#title').val());
+                data.append('author', $('#author').val());
+                data.append('description', $('#description').val());
+                $.ajax({
+                    url: '/api/books/add',
+                    type: 'POST',
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.code == 200) {
+                            location.href = '/books'
+                        } else {
+                            alert(data.message || '新增失败')
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>

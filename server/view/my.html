@@ -1,0 +1,32 @@
+<body>
+    <div class="container">
+        <% include ./tpl/nav %>
+            <div class="form-group">
+                <strong for="user_name">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</strong>
+                <span>
+                    <%=userInfo.user_name%>
+                </span>
+            </div>
+            <div class="form-group">
+                <strong for="nick_name">用户昵称：</strong>
+                <span>
+                    <%=userInfo.nick_name%>
+                </span>
+            </div>
+            <div class="form-group">
+                <strong for="nick_name">创建时间：</strong>
+                <span>
+                    <%=userInfo.create_time%>
+                </span>
+            </div>
+            <div class="form-group">
+                <strong for="description">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：</strong>
+                <span>
+                    <%=userInfo.description%>
+                </span>
+            </div>
+            <div class="form-group">
+                <a href="/my/edit" class="btn btn-default">修改</a>
+            </div>
+    </div>
+</body>

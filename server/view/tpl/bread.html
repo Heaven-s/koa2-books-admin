@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <% bread.forEach((item) => { %>
+        <% if (item.url) {%>
+        <li><a href="<%=item.url%>"><%=item.name%></a></li>
+        <% } else { %>
+        <li class="active"><%=item.name%></li>
+        <% } %>
+    <% }) %>
+</ol>

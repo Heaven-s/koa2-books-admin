@@ -1,0 +1,103 @@
+<body>
+    <div class="container">
+        <% include ../tpl/nav %>   
+        <% include ../tpl/bread %>
+        <div class="top">
+            <label><input class="check-all" type="checkbox">&nbsp;&nbsp;全选</label>
+            <a href="/books/add" type="button" class="btn btn-default">新增</a>
+            <a href="javascript:;" type="button" class="btn btn-default del_btn">删除</a>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th width="80">状态</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th width="100">加入时间</th>
+                    <th width="100">更新时间</th>
+                    <th width="300">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (items && items.length > 0) { %>
+                    <% items.forEach((item) => { %>
+                        <tr data-id="<%= item.id %>">
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td><%= item.title %></td>
+                            <td><%= item.author %></td>
+                            <td><%= item.create_time %></td>
+                            <td><%= item.modified_time %></td>
+                            <td>
+                                <a href="<%= item.url %>" target="_blank" class="btn btn-default">查看</a>
+                                <a href="/books/<%= item.id %>/edit" class="btn btn-primary">修改</a>
+                                <a href="javascript:void(0)" class="btn btn-danger del_book">删除</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr><td colspan="6">没有数据</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <%- pageHtml %>
+    </div>
+    <% include ../tpl/script %>
+    <script>
+        $('input[type="checkbox"]').on('click', function () {
+            var self = $(this);
+            if (self.hasClass('check-all')) {
+                if (self.prop('checked')) {
+                    $('.table').find('input[type="checkbox"]').prop('checked', true)
+                } else {
+                    $('.table').find('input[type="checkbox"]').prop('checked', false)
+                }
+            } else {
+                if (self.prop('checked')) {
+                    var flag = true;
+                    $('.table').find('input[type="checkbox"]').each(function () {
+                        if (!$(this).prop('checked')) {
+                            flag = false;
+                            return false;
+                        }
+                    });
+                    if (flag) {
+                        $('.check-all').prop('checked', true)
+                    }
+                } else if ($('.check-all').prop('checked')) {
+                    $('.check-all').prop('checked', false)
+                }
+            }
+        });
+
+        $('.del_btn').on('click', function(){
+            var ids = [];
+            $('.table').find('input[type="checkbox"]').each(function () {
+                if ($(this).prop('checked')) {
+                    ids.push($(this).closest('tr').attr('data-id'))
+                }
+            });
+            if (ids.length === 0) {
+                alert('请选择要删除的用户！')
+                return;
+            }
+            delUserFn(ids.join(','))
+        })
+
+        $('.del_book').on('click', function () {
+            var ids = $(this).closest('tr').attr('data-id');
+            delUserFn(ids)
+        })
+
+        function delUserFn (ids) {
+            $.post('/api/books/del', { ids: ids }, function (data) {
+                if (data.code === 200) {
+                    location.reload()
+                } else {
+                    alert(data.message || '删除失败！')
+                }
+            })
+        }
+    </script>
+</body>

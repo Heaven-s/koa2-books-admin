@@ -1,0 +1,36 @@
+<body class="login-page">
+    <div class="container">
+        <form class="form-signin">
+            <h2 class="form-signin-heading">用户登陆</h2>
+            <label for="inputEmail" class="sr-only">用户名</label>
+            <input type="text" id="inputEmail" class="form-control user_name" placeholder="用户名" required autofocus>
+            <label for="inputPassword" class="sr-only">密码</label>
+            <input type="password" id="inputPassword" class="form-control password" placeholder="密码" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> 记住密码
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn_login" type="submit">登陆</button>
+        </form>
+    </div>
+    <% include ./tpl/script %>
+    <script>
+        $('.btn_login').on('click', function (e) {
+            e.preventDefault();
+            var user_name = $('.user_name').val();
+            var password = $('.password').val();
+            var item = {
+                user_name: user_name,
+                password: password,
+            }
+            $.post('/api/login', item, function (data) {
+                if (data.code === 200) {
+                    location.href = '/user'
+                } else {
+                    alert(data.message || '用户名或密码错误！')
+                }
+            })
+        });
+    </script>
+</body>

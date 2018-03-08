@@ -1,0 +1,14 @@
+dist
+node_modules/*
+static/pdf/*
+!node_modules/grunt-contrib-requirejs
+rev
+bower_components
+.idea
+npm-debug.log
+*.swp
+.DS_Store
+.DS_Store?
+*.zip
+*.7z
+*.rar

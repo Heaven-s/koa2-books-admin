@@ -1,0 +1,32 @@
+{
+  "name": "books",
+  "version": "1.0.0",
+  "description": "koa2",
+  "main": "config.js",
+  "scripts": {
+    "start": "gulp dev",
+    "init": "node server/initdb/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-ejs": "^4.1.0",
+    "koa-logger": "^3.1.0",
+    "koa-router": "^7.2.1",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^4.0.1",
+    "moment": "^2.19.1",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "graceful-fs": "^4.1.11",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1"
+  }
+}
