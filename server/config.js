@@ -1,6 +1,6 @@
 const config = {
     
-    port: 80,
+    port: 8080,
 
     domain: 'localhost',
 
